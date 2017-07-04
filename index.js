@@ -7,7 +7,7 @@ const APP_ID = 'amzn1.ask.skill.b10d250d-4358-466a-a9b2-4fd5a28db0bb';
 var alexa_score = 0, player_score = 0;
 const handlers = {
 	'LaunchRequest': function () {
-		this.attributes.speechOutput='Welcome to Rock, Spock, Whatever Game. Please say your command';
+		this.attributes.speechOutput='Welcome to Rock, Spock, something something game. Please say your command';
 		this.attributes.repromptSpeech = 'bytch? command please?';
 		this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
 	},
@@ -21,7 +21,7 @@ const handlers = {
 		}
 
 		if (itemName == 'thank you') {
-			var data = "Quitting is for losers <break time=\"0.5s\"/> Your final score is " + player_score + " and my final score is: " + alexa_score;
+			var data = "Quitting is for losers <break time=\"0.5s\"/> Your final score is: " + player_score + " and my final score is: " + alexa_score;
 			alexa_score = 0;
 			player_score = 0;
 			this.emit(':tell', data);
@@ -66,8 +66,8 @@ const handlers = {
 					: (alexa_score++, rules[alexa_word][itemName] + "<break time=\"0.5s\"/> looks like I won");
 			}
 
-			this.attributes.speechOutput = response;
-			this.attributes.repromptSpeech = "Say a command";
+			this.attributes.repromptSpeech = " Say a command";
+			this.attributes.speechOutput = response + this.attributes.repromptSpeech;
 			this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
 		}
 	}
